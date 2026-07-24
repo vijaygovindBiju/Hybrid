@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class FetchSongs {
@@ -10,8 +9,8 @@ class FetchSongs {
       isPermission = await _audioQuery.permissionsRequest();
     } else {
       // todo: logic for geting the song
-      List audio = await _audioQuery.queryAlbums();
-      debugPrint(audio.toString());
+      List<SongModel> audio = await _audioQuery.querySongs();
+      return audio;
     }
   }
 }
