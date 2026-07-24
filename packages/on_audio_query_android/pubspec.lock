@@ -58,28 +58,15 @@ packages:
     dependency: "direct dev"
     description:
       name: flutter_lints
-      sha256: "3105dc8492f6183fb076ccf1f351ac3d60564bff92e20bfc4af9cc1651f4e7e1"
+      sha256: a25a15ebbdfc33ab1cd26c63a6ee519df92338a9c10f122adda92938253bef04
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.0"
+    version: "2.0.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_web_plugins:
-    dependency: transitive
-    description: flutter
-    source: sdk
-    version: "0.0.0"
-  id3:
-    dependency: transitive
-    description:
-      name: id3
-      sha256: "24176a6e08db6297c8450079e94569cd8387f913c817e5e3d862be7dc191e0b8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.2"
   leak_tracker:
     dependency: transitive
     description:
@@ -108,10 +95,10 @@ packages:
     dependency: transitive
     description:
       name: lints
-      sha256: "12f842a479589fea194fe5c5a3095abc7be0c1f2ddfa9a0e76aed1dbd26a87df"
+      sha256: "0a217c6c989d21039f1498c3ed9f3ed71b354e69873f13a8dfc3c9fe76f1b452"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.0"
+    version: "2.1.1"
   matcher:
     dependency: transitive
     description:
@@ -136,44 +123,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.0"
-  on_audio_query:
-    dependency: "direct main"
-    description:
-      path: "packages/on_audio_query"
-      relative: true
-    source: path
-    version: "2.9.0"
-  on_audio_query_android:
-    dependency: transitive
-    description:
-      path: "packages/on_audio_query_android"
-      relative: true
-    source: path
-    version: "1.1.0"
-  on_audio_query_ios:
-    dependency: transitive
-    description:
-      name: on_audio_query_ios
-      sha256: "9b3efa39a656fa3720980e3c6a1f55b7257d0032a45ffeb3f70eaa2c7f10f929"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   on_audio_query_platform_interface:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: on_audio_query_platform_interface
       sha256: c23e019a31bd0774828476e428fd33b0dd1d82c9d4791dba80429358fc65dcd3
       url: "https://pub.dev"
     source: hosted
     version: "1.7.0"
-  on_audio_query_web:
-    dependency: transitive
-    description:
-      name: on_audio_query_web
-      sha256: "990efa52d879e6caffa97f24b34acd9caa1ce2c4c4cb873fe5a899a9b1af02c7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.6.0"
   path:
     dependency: transitive
     description:
@@ -260,5 +217,5 @@ packages:
     source: hosted
     version: "15.2.0"
 sdks:
-  dart: ">=3.11.4 <4.0.0"
+  dart: ">=3.9.0-0 <4.0.0"
   flutter: ">=3.18.0-18.0.pre.54"
