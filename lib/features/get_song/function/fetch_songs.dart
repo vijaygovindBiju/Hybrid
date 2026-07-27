@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/widgets.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -17,16 +19,28 @@ class FetchSongs {
   }
 
   Future filterSong() async {
-    List<SongModel> songs =await getSong();
-    List<SongModel> filteredSong= songs.where(
-      (song) =>
-          song.isMusic == true &&
-          song.isAlarm != true &&
-          song.isNotification != true &&
-          song.isRingtone != true &&
-          song.isPodcast != true &&
-          song.isAudioBook != true,
-    ).toList();
+    List<SongModel> songs = await getSong();
+    List<SongModel> filteredSong = songs
+        .where(
+          (song) =>
+              song.isMusic == true &&
+              song.isAlarm != true &&
+              song.isNotification != true &&
+              song.isRingtone != true &&
+              song.isPodcast != true &&
+              song.isAudioBook != true &&
+              !song.data.contains("WhatsApp"),
+        )
+        .toList();
     return filteredSong;
+  }
+
+  Future artWork(int id) async {
+    try {
+      return  await _audioQuery.queryArtwork(id, ArtworkType.ALBUM);
+
+    } catch (e) {
+      debugPrint("$e");
+    }
   }
 }

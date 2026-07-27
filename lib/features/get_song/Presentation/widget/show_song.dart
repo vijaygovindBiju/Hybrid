@@ -2,80 +2,80 @@ import 'package:flutter/material.dart';
 
 class ShowSong extends StatelessWidget {
   /// Return song [id]
-  int  id;
+  int id;
 
   /// Return song [data]
-  String  data ;
+  String data;
 
   /// Return song [uri]
-  String?  uri  ;
+  String? uri;
 
   /// Return song [displayName]
-  String  displayName  ;
+  String displayName;
 
   /// Return song [displayName] without Extension
-  String  displayNameWOExt ; 
+  String displayNameWOExt;
 
   /// Return song [size]
-  int  size;
+  int size;
 
   /// Return song [album]
-  String?  album  ;
+  String? album;
 
   /// Return song [albumId]
-  int?  albumId  ;
+  int? albumId;
 
   /// Return song [artist]
-  String?  artist;
+  String? artist;
 
   /// Return song [artistId]
-  int?  artistId ;
+  int? artistId;
 
   /// Return song [genre]
   ///
   /// Important:
   ///   * Only Api >= 30/Android 11
-  String?  genre ;
+  String? genre;
 
   /// Return song [genreId]
   ///
   /// Important:
   ///   * Only Api >= 30/Android 11
-  int?  genreId ;
+  int? genreId;
 
   /// Return song [bookmark]
-  int?  bookmark;
+  int? bookmark;
 
   /// Return song [composer]
-  String?  composer ;
+  String? composer;
 
   /// Return song [dateAdded]
-  int?  dateAdded  ;
+  int? dateAdded;
 
   /// Return song [dateModified]
-  int?  dateModified;
+  int? dateModified;
 
   /// Return song [duration]
-  int?  duration  ;
+  int? duration;
 
   /// Return song [title]
-  String  title;
+  String title;
 
   /// Return song [track]
-  int?  track;
+  int? track;
 
   // /// Return song [uri]
   // String get uri;
 
   /// Return song only the [fileExtension]
-  String fileExtension ;
+  String fileExtension;
 
   // Bool methods
 
   /// Return song type: [isAlarm]
   ///
   /// Will always return true or false
-  bool?  isAlarm  ;
+  bool? isAlarm;
 
   /// Return song type: [isAudioBook]
   ///
@@ -83,31 +83,30 @@ class ShowSong extends StatelessWidget {
   ///
   /// Important:
   ///   * Only Api >= 29/Android 10
-  bool?  isAudioBook ;
+  bool? isAudioBook;
 
   /// Return song type: [isMusic]
   ///
   /// Will always return true or false
-  bool?  isMusic;
+  bool? isMusic;
 
   /// Return song type: [isNotification]
   ///
   /// Will always return true or false
-  bool?  isNotification ;
+  bool? isNotification;
 
   /// Return song type: [isPodcast]
   ///
   /// Will always return true or false
-  bool?  isPodcast ;
+  bool? isPodcast;
 
   /// Return song type: [isRingtone]
   ///
   /// Will always return true or false
-  bool?  isRingtone;
+  bool? isRingtone;
 
   /// Return a map with all [keys] and [values] from specific song.
-  Map  getMap;
-
+  Map getMap;
 
   ShowSong({
     super.key,
@@ -128,7 +127,6 @@ class ShowSong extends StatelessWidget {
     required this.duration,
     required this.fileExtension,
     required this.genre,
-    required this.genreId,
     required this.getMap,
     required this.isAlarm,
     required this.isAudioBook,
@@ -137,19 +135,17 @@ class ShowSong extends StatelessWidget {
     required this.isPodcast,
     required this.isRingtone,
     required this.title,
-    required this.track
+    required this.track,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          // Text("Id $id", style: TextStyle(fontSize: 5)),
-          Text("Data $data", style: TextStyle(fontSize: 7)),
-          Text("Display name $displayName", style: TextStyle(fontSize: 7)),
-        ],
-      ),
+    return Column(
+      children: [
+        // Text("Id $id", style: TextStyle(fontSize: 5)),
+        Text("Data $data", style: TextStyle(fontSize: 7)),
+        Text("Display name $displayName", style: TextStyle(fontSize: 7)),
+      ],
     );
   }
 }
