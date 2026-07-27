@@ -1,3 +1,4 @@
+
 import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
@@ -35,10 +36,9 @@ class FetchSongs {
     return filteredSong;
   }
 
-  Future artWork(int id) async {
+  Future<Uint8List?> artWork(int id) async {
     try {
-      return  await _audioQuery.queryArtwork(id, ArtworkType.ALBUM);
-
+      return await _audioQuery.queryArtwork(id, ArtworkType.ALBUM);
     } catch (e) {
       debugPrint("$e");
     }
