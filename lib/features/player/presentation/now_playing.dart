@@ -15,8 +15,12 @@ class NowPlaying extends ConsumerStatefulWidget {
 
 class _NowPlayingState extends ConsumerState<NowPlaying> {
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     ref.read(playerProvider.notifier).playSong(widget.song);
+  }
+
+  Widget build(BuildContext context) {
     final deviceSize = MediaQuery.sizeOf(context);
     return Scaffold(
       body: Container(
@@ -119,18 +123,12 @@ class _NowPlayingState extends ConsumerState<NowPlaying> {
                         ),
                         child: IconButton(
                           onPressed: () {
-                            final player = ref.read(playerProvider);
-
-                            if (player.isPlaying) {
-                              ref.read(playerProvider.notifier).pauseSong();
-                            } else {
-                              ref
-                                  .read(playerProvider.notifier)
-                                  .playSong(widget.song);
-                            }
+                            ref.watch(playerProvider).isPlaying
+                                ? ref.read(playerProvider.notifier).pauseSong()
+                                : ref.read(playerProvider.notifier).resume();
                           },
                           icon: Icon(
-                            ref.watch(playerProvider).isPlaying
+                            ref.read(playerProvider).isPlaying
                                 ? Icons.pause
                                 : Icons.play_arrow,
                           ),
