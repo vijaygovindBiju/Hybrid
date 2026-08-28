@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hybrid/features/get_song/data/provider/album_cover_prov.dart';
 import 'package:hybrid/features/get_song/function/song_detailzation.dart';
-import 'package:hybrid/features/player/function/player_function.dart';
+import 'package:hybrid/features/player/data/provider/player_provider.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class NowPlaying extends ConsumerStatefulWidget {
@@ -14,10 +14,9 @@ class NowPlaying extends ConsumerStatefulWidget {
 }
 
 class _NowPlayingState extends ConsumerState<NowPlaying> {
-  final PlayerFunction player = PlayerFunction();
-  int isplay = 0;
   @override
   Widget build(BuildContext context) {
+    ref.read(playerProvider.notifier).playSong(widget.song);
     final deviceSize = MediaQuery.sizeOf(context);
     return Scaffold(
       body: Container(
@@ -75,12 +74,21 @@ class _NowPlayingState extends ConsumerState<NowPlaying> {
                 children: [
                   Row(
                     children: [
-                      Text(formatDuration(0)),
+                      Text(
+                        formatDuration(
+                          ref.watch(playerProvider).currentPosition.inSeconds,
+                        ),
+                      ),
                       Expanded(
                         child: Slider(
-                          value: 0,
+                          max: ((widget.song.duration ?? 0) / 1000).toDouble(),
+                          value: ref
+                              .watch(playerProvider)
+                              .currentPosition
+                              .inSeconds
+                              .toDouble(),
                           onChanged: (value) {
-                            player.seek(value);
+                            ref.read(playerProvider.notifier).seek(value);
                           },
                         ),
                       ),
@@ -111,15 +119,20 @@ class _NowPlayingState extends ConsumerState<NowPlaying> {
                         ),
                         child: IconButton(
                           onPressed: () {
-                            setState(() {
-                           isplay= player.playSong(widget.song.data, isplay);
-                              
-                            });
+                            final player = ref.read(playerProvider);
+
+                            if (player.isPlaying) {
+                              ref.read(playerProvider.notifier).pauseSong();
+                            } else {
+                              ref
+                                  .read(playerProvider.notifier)
+                                  .playSong(widget.song);
+                            }
                           },
                           icon: Icon(
-                            isplay == 1
-                                ? Icons.play_arrow_outlined
-                                : Icons.pause,
+                            ref.watch(playerProvider).isPlaying
+                                ? Icons.pause
+                                : Icons.play_arrow,
                           ),
                         ),
                       ),
