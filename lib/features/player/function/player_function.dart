@@ -8,7 +8,16 @@ class PlayerFunction {
     return "${minutes.toString().padLeft(2, '0')} : ${seconds.toString().padLeft(2, '0')}";
   }
 
-  void seek(double value) {
-    player.seek(Duration(seconds: value.toInt()));
+  Future<void> seek(double value) {
+    return player.seek(Duration(seconds: value.toInt()));
+  }
+
+  Future<void> playSong(String filePath) async {
+    await player.setFilePath(filePath);
+    await player.play();
+  }
+
+  Future<void> pauseSong() async {
+    await player.pause();
   }
 }

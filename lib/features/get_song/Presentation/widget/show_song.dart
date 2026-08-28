@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hybrid/features/get_song/data/provider/album_cover_prov.dart';
 import 'package:hybrid/features/get_song/data/provider/get_color_prov.dart';
 import 'package:hybrid/features/get_song/function/song_detailzation.dart';
@@ -17,7 +18,7 @@ class ShowSong extends ConsumerWidget {
 
     return InkWell(
       onTap: () {
-        debugPrint("it's pressed ${song.title}");
+        context.pushNamed('now-playing',extra: song);
       },
       child: Container(
         decoration: BoxDecoration(
