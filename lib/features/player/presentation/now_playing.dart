@@ -17,9 +17,12 @@ class _NowPlayingState extends ConsumerState<NowPlaying> {
   @override
   void initState() {
     super.initState();
-    ref.read(playerProvider.notifier).playSong(widget.song);
+    final playerState = ref.read(playerProvider);
+    if (playerState.nowPlaying?.id != widget.song.id) {
+      ref.read(playerProvider.notifier).playSong(widget.song);
+    }
   }
-
+  @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.sizeOf(context);
     return Scaffold(
@@ -90,7 +93,11 @@ class _NowPlayingState extends ConsumerState<NowPlaying> {
                               .watch(playerProvider)
                               .currentPosition
                               .inSeconds
-                              .toDouble(),
+                              .toDouble()
+                              .clamp(
+                                0.0,
+                                ((widget.song.duration ?? 0) / 1000).toDouble(),
+                              ),
                           onChanged: (value) {
                             ref.read(playerProvider.notifier).seek(value);
                           },
@@ -123,7 +130,7 @@ class _NowPlayingState extends ConsumerState<NowPlaying> {
                         ),
                         child: IconButton(
                           onPressed: () {
-                            ref.watch(playerProvider).isPlaying
+                            ref.read(playerProvider).isPlaying
                                 ? ref.read(playerProvider.notifier).pauseSong()
                                 : ref.read(playerProvider.notifier).resume();
                           },
