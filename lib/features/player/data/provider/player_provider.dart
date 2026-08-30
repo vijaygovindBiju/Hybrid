@@ -20,23 +20,21 @@ class PlayerNotifier extends Notifier<PlayData> {
     player = PlayerFunction();
 
     _positionSub = player.positionStream.listen((position) {
-      if (state.isPlaying) {
-        state = PlayData(
-          nowPlaying: state.nowPlaying,
-          currentPosition: position,
-          isPlaying: state.isPlaying,
-        );
-      }
+      state = PlayData(
+        nowPlaying: state.nowPlaying,
+        currentPosition: position,
+        isPlaying: state.isPlaying,
+      );
     });
 
     _playerStateSub = player.playerStateStream.listen((playerState) {
-      if (playerState.processingState == ProcessingState.completed) {
-        state = PlayData(
-          nowPlaying: state.nowPlaying,
-          currentPosition: state.currentPosition,
-          isPlaying: false,
-        );
-      }
+      final isPlaying = playerState.playing &&
+          playerState.processingState != ProcessingState.completed;
+      state = PlayData(
+        nowPlaying: state.nowPlaying,
+        currentPosition: state.currentPosition,
+        isPlaying: isPlaying,
+      );
     });
 
     ref.onDispose(() async {
@@ -45,44 +43,27 @@ class PlayerNotifier extends Notifier<PlayData> {
       await player.dispose();
     });
 
-    return PlayData(currentPosition: Duration.zero, isPlaying: true);
+    return PlayData(currentPosition: Duration.zero, isPlaying: false);
   }
 
   Future<void> playSong(SongModel song) async {
-    await player.playSong(song.data);
-
     state = PlayData(
       nowPlaying: song,
       currentPosition: Duration.zero,
       isPlaying: true,
     );
+    await player.playSong(song.data);
   }
 
   Future<void> pauseSong() async {
     await player.pauseSong();
-    state = PlayData(
-      nowPlaying: state.nowPlaying,
-      currentPosition: state.currentPosition,
-      isPlaying: false,
-    );
   }
 
   Future<void> resume() async {
-    final wasCompleted = player.isCompleted;
     await player.resumeSong();
-    state = PlayData(
-      nowPlaying: state.nowPlaying,
-      currentPosition: wasCompleted ? Duration.zero : state.currentPosition,
-      isPlaying: true,
-    );
   }
 
   Future<void> seek(double value) async {
     await player.seek(value);
-    state = PlayData(
-      nowPlaying: state.nowPlaying,
-      currentPosition: Duration(seconds: value.toInt()),
-      isPlaying: state.isPlaying,
-    );
   }
 }
