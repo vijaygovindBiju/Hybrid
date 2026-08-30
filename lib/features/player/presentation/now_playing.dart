@@ -80,7 +80,7 @@ class _NowPlayingState extends ConsumerState<NowPlaying> {
                     children: [
                       Text(
                         formatDuration(
-                          ref.watch(playerProvider).currentPosition.inSeconds,
+                          ref.watch(playerProvider).currentPosition.inMilliseconds,
                         ),
                       ),
                       Expanded(
@@ -128,7 +128,7 @@ class _NowPlayingState extends ConsumerState<NowPlaying> {
                                 : ref.read(playerProvider.notifier).resume();
                           },
                           icon: Icon(
-                            ref.read(playerProvider).isPlaying
+                            ref.watch(playerProvider).isPlaying
                                 ? Icons.pause
                                 : Icons.play_arrow,
                           ),

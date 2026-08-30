@@ -7,7 +7,7 @@ class FetchSongs {
   final OnAudioQuery _audioQuery = OnAudioQuery();
 
 
-  Future getSong() async {
+  Future<List<SongModel>> getSong() async {
     bool isPermission = await _audioQuery.permissionsStatus();
     if (!isPermission) {
       isPermission = await _audioQuery.permissionsRequest();
@@ -21,7 +21,7 @@ class FetchSongs {
     return [];
   }
 
-  Future filterSong() async {
+  Future<List<SongModel>> filterSong() async {
     List<SongModel> songs = await getSong();
     List<SongModel> filteredSong = songs
         .where(

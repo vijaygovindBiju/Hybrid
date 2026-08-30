@@ -3,6 +3,9 @@ import 'package:just_audio/just_audio.dart';
 class PlayerFunction {
   final AudioPlayer player = AudioPlayer();
 
+  Stream<Duration> get positionStream => player.positionStream;
+  
+
   Future<void> playSong(String filePath) async {
     await player.setFilePath(filePath);
     await player.play();
@@ -25,4 +28,5 @@ class PlayerFunction {
   Future<void> dispose() async {
     await player.dispose();
   }
+
 }
